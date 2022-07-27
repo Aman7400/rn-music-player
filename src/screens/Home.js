@@ -1,4 +1,4 @@
-import { View, Text, SafeAreaView, TouchableOpacity, ScrollView, ImageBackground } from 'react-native'
+import { View, Text, SafeAreaView, TouchableOpacity, ScrollView, ImageBackground, Image } from 'react-native'
 import React from 'react'
 import greetings from '../../src/utils/greetings'
 import Roboto from "../../src/constants/fonts"
@@ -21,6 +21,7 @@ const Home = () => {
         <Discover />
 
         {/* Recently Played */}
+        <RecentlyPlayed />
         {/* Popular */}
 
       </ScrollView>
@@ -106,5 +107,43 @@ function Discover() {
 
     </>
 
+  )
+}
+
+
+function RecentlyPlayed() {
+  return (
+    <>
+      <Text style={{ fontSize: 16, margin: 16, fontFamily: Roboto.medium }}>
+        Recently played
+      </Text>
+
+      <View style={{ paddingHorizontal: 16 }}>
+        {
+          discover.map((item, i) =>
+            <RecentlyPlayedItem item={item} />
+          )
+        }
+      </View>
+
+    </>
+  )
+}
+
+
+function RecentlyPlayedItem({ item }) {
+  return (
+    <TouchableOpacity style={{ flexDirection: "row", marginBottom: 8 }}>
+      <View>
+        <Image style={{
+          width: 64, height: 64, borderRadius: 16
+        }} source={item.img} />
+      </View>
+      <View style={{ flex: 1, padding: 8 }}>
+        <Text style={{ fontSize: 16, fontFamily: Roboto.regular }}>
+          Some Random Song
+        </Text>
+      </View>
+    </TouchableOpacity>
   )
 }
