@@ -29,9 +29,9 @@ export default function HomeHeader() {
           {greeting}
         </Text>
       </View>
-      {/* Search Button */}
+      {/* Notifications Button */}
       <TouchableOpacity>
-        <Icon name="search" size={24} />
+        <Icon name="notifications-outline" size={24} />
       </TouchableOpacity>
     </View>
   )
