@@ -1,10 +1,9 @@
 
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import React from 'react'
-import Categories from '../screens/Categories';
 import Profile from '../screens/Profile';
 import { getTabIcon } from '../utils/tabIconGenerator';
-import { HomeStack } from './StackNavigation';
+import { CategoryStack, HomeStack } from './StackNavigation';
 
 
 
@@ -22,7 +21,7 @@ const TabNavigation = () => {
                 }
             })}>
             <Tab.Screen name="Landing" component={HomeStack} />
-            <Tab.Screen name="Categories" component={Categories} />
+            <Tab.Screen name="Categories" component={CategoryStack} />
             <Tab.Screen name="Profile" component={Profile} />
         </Tab.Navigator>
     )
