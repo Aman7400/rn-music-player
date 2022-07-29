@@ -2,8 +2,11 @@ import { Text, TouchableOpacity, View } from "react-native"
 import greetings from "../../utils/greetings"
 import Roboto from "../../constants/fonts"
 import Icon from 'react-native-vector-icons/Ionicons'
+import { useNavigation } from "@react-navigation/native"
 
 export default function HomeHeader() {
+
+  const navigation = useNavigation()
 
   const greeting = greetings()
 
@@ -30,7 +33,7 @@ export default function HomeHeader() {
         </Text>
       </View>
       {/* Notifications Button */}
-      <TouchableOpacity>
+      <TouchableOpacity onPress={() => navigation.navigate("Notification")}>
         <Icon name="notifications-outline" size={24} />
       </TouchableOpacity>
     </View>

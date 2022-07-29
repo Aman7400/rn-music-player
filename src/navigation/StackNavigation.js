@@ -1,6 +1,7 @@
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import Categories from "../screens/Categories";
 import Home from "../screens/Home";
+import Notification from "../screens/Notification";
 import ScrollabelSongList from "../screens/ScrollabelSongList";
 
 
@@ -13,6 +14,7 @@ const HomeStack = () => {
         }}>
             <Stack.Screen name="Home" component={Home} />
             <Stack.Screen name ="SongList" component={ScrollabelSongList} />
+            <Stack.Screen name ="Notification" component={Notification} />
         </Stack.Navigator>
     )
 }
