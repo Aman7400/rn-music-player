@@ -1,4 +1,4 @@
-import { View, Text, SafeAreaView, TouchableOpacity, ScrollView, ImageBackground, Image } from 'react-native'
+import { View, Text, SafeAreaView, TouchableOpacity, ScrollView, ImageBackground, Image, FlatList } from 'react-native'
 import React from 'react'
 import greetings from '../../src/utils/greetings'
 import Roboto from "../../src/constants/fonts"
@@ -23,6 +23,9 @@ const Home = () => {
         {/* Recently Played */}
         <RecentlyPlayed />
         {/* Popular */}
+        <Popular />
+
+
 
       </ScrollView>
 
@@ -85,17 +88,14 @@ function Discover() {
               key={i}
               imageStyle={{
                 borderRadius: 16
-
               }}
               source={item.img}
               style={{
                 width: 360,
-                marginRight: 32,
+                marginRight: i < discover.length - 1 ? 32 : 16,
                 height: 240,
                 justifyContent: "center",
                 alignItems: "center",
-                borderRadius: 16
-
               }}>
               <Text style={{ fontSize: 32, color: "white", fontFamily: Roboto.bold }}>
                 Discover Card {i}
@@ -121,7 +121,7 @@ function RecentlyPlayed() {
       <View style={{ paddingHorizontal: 16 }}>
         {
           discover.map((item, i) =>
-            <RecentlyPlayedItem item={item} />
+            <RecentlyPlayedItem key={i} item={item} />
           )
         }
       </View>
@@ -133,7 +133,11 @@ function RecentlyPlayed() {
 
 function RecentlyPlayedItem({ item }) {
   return (
-    <TouchableOpacity style={{ flexDirection: "row", marginBottom: 8 }}>
+    <TouchableOpacity
+      style={{
+        flexDirection: "row",
+        marginBottom: 8,
+      }}>
       <View>
         <Image style={{
           width: 64, height: 64, borderRadius: 16
@@ -145,5 +149,54 @@ function RecentlyPlayedItem({ item }) {
         </Text>
       </View>
     </TouchableOpacity>
+  )
+}
+
+function Popular() {
+  return (
+    <>
+      <Text style={{ fontSize: 16, margin: 16, fontFamily: Roboto.medium }}>
+        Popular Songs
+      </Text>
+      <ScrollView
+
+        showsHorizontalScrollIndicator={false}
+
+        style={{
+          paddingHorizontal: 16,
+          paddingTop: 0,
+          paddingBottom: 32
+        }} horizontal={true}>
+
+        {
+          discover.map((item, index) => <PopularItemCard item={item} key={index} />)
+        }
+
+      </ScrollView>
+    </>
+
+  )
+}
+
+function PopularItemCard({ item }) {
+  return (
+
+    <View style={{
+      marginRight: 16,
+      width: 180
+    }}>
+      <Image style={{
+        borderRadius: 16,
+        height: 240,
+        maxWidth:180
+
+      }} source={item.img} />
+
+      <Text style={{ fontSize: 16, fontFamily: Roboto.medium }}>
+        {item.title || 'Some title Goes here which is very long'}
+      </Text>
+
+    </View>
+
   )
 }
