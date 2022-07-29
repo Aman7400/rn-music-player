@@ -6,7 +6,8 @@ import Roboto from "../constants/fonts"
 import { categories } from '../constants/data';
 
 
-const Categories = () => {
+
+const Categories = ({navigation}) => {
 
   const [searchQuery, setSearchQuery] = React.useState('');
 
@@ -49,7 +50,9 @@ const Categories = () => {
 
           {
             filterArray.map((category, index) =>
-              <Card style={{ margin: 4 }} key={index}>
+              <Card onPress={() => navigation.navigate("SongList",{
+                list: category.title
+              })} style={{ margin: 4 }} key={index}>
                 <Card.Cover source={category.img} />
                 <Card.Title title={category.title} />
               </Card>)

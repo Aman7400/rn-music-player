@@ -1,10 +1,12 @@
 import { Image, Text, TouchableOpacity, View } from "react-native"
 import { discover } from "../../constants/data"
 import Roboto from "../../constants/fonts"
+import {useNavigation} from "@react-navigation/native"
 
 
 
 export default function RecentlyPlayed() {
+    const navigation = useNavigation()
     return (
         <>
             <Text style={{ fontSize: 16, margin: 16, fontFamily: Roboto.medium }}>
@@ -14,7 +16,9 @@ export default function RecentlyPlayed() {
             <View style={{ paddingHorizontal: 16 }}>
                 {
                     discover.map((item, i) =>
-                        <RecentlyPlayedItem key={i} item={item} />
+                        <RecentlyPlayedItem onPress={() => navigation.navigate("SongList",{
+                            list:"RecentlyPlayed"
+                        })} key={i} item={item} />
                     )
                 }
             </View>
@@ -23,9 +27,10 @@ export default function RecentlyPlayed() {
     )
 }
 
-function RecentlyPlayedItem({ item }) {
+function RecentlyPlayedItem({ item, onPress }) {
     return (
         <TouchableOpacity
+        onPress={onPress}
             style={{
                 flexDirection: "row",
                 marginBottom: 8,

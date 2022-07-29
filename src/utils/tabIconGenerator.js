@@ -4,7 +4,7 @@ const getTabIcon = ({focused,color,size},route) => {
     
         let iconName ;
 
-        if (route.name === 'Home') {
+        if (route.name === 'Landing') {
 
           iconName = focused ? 'home' : 'home-outline'
                         
