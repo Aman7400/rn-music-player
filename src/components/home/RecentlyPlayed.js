@@ -1,5 +1,5 @@
 import { Image, Text, TouchableOpacity, View } from "react-native"
-import { discover } from "../../constants/data"
+import { discover, songs } from "../../constants/data"
 import Roboto from "../../constants/fonts"
 import {useNavigation} from "@react-navigation/native"
 
@@ -15,9 +15,9 @@ export default function RecentlyPlayed() {
 
             <View style={{ paddingHorizontal: 16 }}>
                 {
-                    discover.map((item, i) =>
+                    songs.filter((song) => song.categories.includes("Recently")).map((item, i) =>
                         <RecentlyPlayedItem onPress={() => navigation.navigate("SongList",{
-                            list:"RecentlyPlayed"
+                            list:"Recently"
                         })} key={i} item={item} />
                     )
                 }
@@ -37,12 +37,15 @@ function RecentlyPlayedItem({ item, onPress }) {
             }}>
             <View>
                 <Image style={{
-                    width: 64, height: 64, borderRadius: 16
+                    width: 64, height: 64, borderRadius: 8
                 }} source={item.img} />
             </View>
             <View style={{ flex: 1, padding: 8 }}>
-                <Text style={{ fontSize: 16, fontFamily: Roboto.regular }}>
-                    Some Random Song
+                <Text style={{ fontSize: 16, fontFamily: Roboto.bold }}>
+                    {item.title}
+                </Text>
+                <Text style={{ fontSize: 12, fontFamily: Roboto.regular }}>
+                    {item.artists.join(", ")}
                 </Text>
             </View>
         </TouchableOpacity>
