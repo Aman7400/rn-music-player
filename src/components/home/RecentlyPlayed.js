@@ -1,24 +1,42 @@
 import { Image, Text, TouchableOpacity, View } from "react-native"
 import { discover, songs } from "../../constants/data"
 import Roboto from "../../constants/fonts"
-import {useNavigation} from "@react-navigation/native"
+import { useNavigation } from "@react-navigation/native"
+import Icon from "react-native-vector-icons/Ionicons"
+import { SongListItem } from "../SongListItem"
 
 
 
 export default function RecentlyPlayed() {
     const navigation = useNavigation()
+    const filterArray = songs.filter((song) => song.categories.includes("Recently"))
     return (
         <>
-            <Text style={{ fontSize: 16, margin: 16, fontFamily: Roboto.medium }}>
-                Recently played
-            </Text>
+            <View style={{
+                flexDirection: "row",
+                justifyContent: "space-between",
+                alignItems: "center",
+                paddingHorizontal: 16
+            }}>
+                <Text style={{ fontSize: 18, marginVertical: 16, fontFamily: Roboto.medium }}>
+                    Recently played
+                </Text>
+
+                <TouchableOpacity onPress={() => navigation.navigate("SongList", {
+                    list: "Recently"
+                })}>
+                    <Icon name="chevron-forward-outline" size={18} />
+
+                </TouchableOpacity>
+
+            </View>
 
             <View style={{ paddingHorizontal: 16 }}>
                 {
-                    songs.filter((song) => song.categories.includes("Recently")).map((item, i) =>
-                        <RecentlyPlayedItem onPress={() => navigation.navigate("SongList",{
-                            list:"Recently"
-                        })} key={i} item={item} />
+                    filterArray.length > 2 && filterArray.slice(0, 2).map((item, i) =>
+                        <SongListItem onPress={() => navigation.navigate("SongList", {
+                            list: "Recently"
+                        })} key={i} song={item} />
                     )
                 }
             </View>
@@ -27,28 +45,4 @@ export default function RecentlyPlayed() {
     )
 }
 
-function RecentlyPlayedItem({ item, onPress }) {
-    return (
-        <TouchableOpacity
-        onPress={onPress}
-            style={{
-                flexDirection: "row",
-                marginBottom: 8,
-            }}>
-            <View>
-                <Image style={{
-                    width: 64, height: 64, borderRadius: 8
-                }} source={item.img} />
-            </View>
-            <View style={{ flex: 1, padding: 8 }}>
-                <Text style={{ fontSize: 16, fontFamily: Roboto.bold }}>
-                    {item.title}
-                </Text>
-                <Text style={{ fontSize: 12, fontFamily: Roboto.regular }}>
-                    {item.artists.join(", ")}
-                </Text>
-            </View>
-        </TouchableOpacity>
-    )
-}
 

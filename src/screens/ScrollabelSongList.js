@@ -2,7 +2,7 @@ import { View, Text, SafeAreaView, ScrollView, TouchableOpacity, Image } from 'r
 import React from 'react'
 import { Button, Card } from 'react-native-paper';
 import { songs } from '../constants/data';
-import Roboto from "../constants/fonts"
+import { SongListItem } from '../components/SongListItem';
 
 const ScrollabelSongList = ({ route, navigation }) => {
   const { list } = route.params
@@ -43,50 +43,3 @@ const ScrollabelSongList = ({ route, navigation }) => {
 export default ScrollabelSongList
 
 
-function SongListItem({song}) {
-  const {title,img,artists,categories} = song
-  return (
-    <TouchableOpacity >
-      <View style={{
-        flexDirection: "row",
-        marginBottom:8,
-        backgroundColor:"white",
-        borderRadius:8,
-        padding:8,
-
-      }}>
-
-        <View >
-          <Image source={img} style={{
-            height: 64,
-            width: 64,
-            borderRadius:8
-          }} />
-        </View>
-        <View style={{
-          marginLeft: 8
-        }}>
-          <Text style={{
-            fontFamily: Roboto.bold,
-            fontSize: 24
-          }}>
-            {title}
-          </Text>
-          <Text style={{
-            fontFamily: Roboto.medium,
-            fontSize: 14
-          }}>
-            {artists.toString()}
-          </Text>
-          <Text style={{
-            fontFamily: Roboto.light,
-            fontSize: 12
-          }}>
-            {categories.toString()}
-          </Text>
-        </View>
-      </View>
-
-    </TouchableOpacity>
-  )
-}
