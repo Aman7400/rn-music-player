@@ -2,14 +2,16 @@ import { Image, Text, TouchableOpacity, View } from "react-native"
 import Roboto from "../constants/fonts"
 import Icon from "react-native-vector-icons/Ionicons"
 import React from "react"
+import { useNavigation } from "@react-navigation/native"
 
 
 
 export function SongListItem({song}) {
     const {title,img,artists,categories} = song
     const [isLiked,setIsLiked] = React.useState(false)
+    const navigation = useNavigation()
     return (
-      <TouchableOpacity >
+      <TouchableOpacity onPress={() => navigation.navigate("SongDetail",{song})}>
         <View style={{
           flexDirection: "row",
           marginBottom:8,
