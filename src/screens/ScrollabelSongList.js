@@ -10,22 +10,19 @@ const ScrollabelSongList = ({ route, navigation }) => {
   const [filterArray, setFilterArray] = React.useState([])
 
   React.useState(() => {
-
     const selectedSongs = songs.filter((song) => song.categories.includes(list))
     setFilterArray([...selectedSongs])
-
   }, [list])
 
-  return (
-    <SafeAreaView>
-      <Text>ScrollabelSongList</Text>
-      <Text>{list}</Text>
-      <Button onPress={() => navigation.goBack()}>
-        Go bAck
-      </Button>
+  
 
+  return (
+    <SafeAreaView style={{
+      flex: 1,
+    }}>
       <ScrollView style={{
-        padding: 16
+        padding: 16,
+        flex:1
       }} vertical={true}>
 
         {

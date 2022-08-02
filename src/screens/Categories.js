@@ -53,7 +53,7 @@ const Categories = ({ navigation }) => {
           <FlatList data={filterArray} numColumns={2} renderItem={({ item }) => {
             return (
               <Card
-                onPress={() => navigation.navigate("SongList", {})}
+                onPress={() => navigation.navigate("SongList", {list:item.title})}
                 style={{ width: cardWidth, margin: 4 }}>
                 <Card.Cover source={item.img} />
                 <Card.Title title={item.title} />
