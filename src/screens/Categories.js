@@ -1,4 +1,4 @@
-import { View, Text, SafeAreaView, ScrollView } from 'react-native'
+import { View, Text, SafeAreaView, FlatList, Dimensions } from 'react-native'
 import React from 'react'
 
 import { Card, Searchbar } from 'react-native-paper';
@@ -7,7 +7,7 @@ import { categories } from '../constants/data';
 
 
 
-const Categories = ({navigation}) => {
+const Categories = ({ navigation }) => {
 
   const [searchQuery, setSearchQuery] = React.useState('');
 
@@ -18,6 +18,10 @@ const Categories = ({navigation}) => {
     const searchedRes = categories.filter((category) => category.title.includes(query))
     setFilterArray(searchedRes)
   }
+
+
+  const cardWidth = (Dimensions.get("screen").width - 48) / 2
+
 
   return (
     <SafeAreaView style={{
@@ -41,24 +45,23 @@ const Categories = ({navigation}) => {
           onChangeText={onChangeSearch}
           value={searchQuery}
         />
-        {/* Categories */}
-        {filterArray.length > 0 && <ScrollView style={{
-          marginVertical: 8,
-        }}
-          showsVerticalScrollIndicator={false}
-          vertical={true}>
 
-          {
-            filterArray.map((category, index) =>
-              <Card onPress={() => navigation.navigate("SongList",{
-                list: category.title
-              })} style={{ margin: 4 }} key={index}>
-                <Card.Cover source={category.img} />
-                <Card.Title title={category.title} />
+        <View style={{
+          marginTop: 16
+        }}>
+
+          <FlatList data={filterArray} numColumns={2} renderItem={({ item }) => {
+            return (
+              <Card
+                onPress={() => navigation.navigate("SongList", {})}
+                style={{ width: cardWidth, margin: 4 }}>
+                <Card.Cover source={item.img} />
+                <Card.Title title={item.title} />
               </Card>)
           }
+          } />
 
-        </ScrollView>}
+        </View>
 
         {/* Fallback for no results */}
 

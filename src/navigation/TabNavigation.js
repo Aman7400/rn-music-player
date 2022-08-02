@@ -18,7 +18,8 @@ const TabNavigation = () => {
                 tabBarShowLabel: false,
                 tabBarStyle: {
                     paddingVertical: 16,
-                }
+                },
+                swipeEnabled:true
             })}>
             <Tab.Screen name="Landing" component={HomeStack} />
             <Tab.Screen name="Categories" component={CategoryStack} />
