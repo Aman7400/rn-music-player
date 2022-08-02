@@ -1,23 +1,25 @@
 import { useNavigation } from "@react-navigation/native";
 import { ImageBackground, ScrollView, Text,TouchableOpacity } from "react-native";
-import { discover } from "../../constants/data";
+import { discover, songs } from "../../constants/data";
 import Roboto from "../../constants/fonts";
+import SectionToolbar from "../SectionToolbar";
 
 export default function Discover() {
   const navigation = useNavigation()
+  const filterArray = songs.filter((song) => song.categories.includes("Discover"))
   return (
     <>
-      <Text style={{ fontSize: 16, marginBottom: 4, marginLeft: 16, fontFamily: Roboto.medium }}>
-        Discover this week's latest songs
-      </Text>
+      <SectionToolbar action={() => navigation.navigate("SongList", {
+                list: "Discover"
+            })} title={"Discover this week's latest songs"} /> 
 
       <ScrollView bounces={false} horizontal={true} style={{
         marginLeft: 16
       }} showsHorizontalScrollIndicator={false}>
         {
-          discover.map((item, i) =>
+          filterArray.map((item, i) =>
 
-            <TouchableOpacity key={i} onPress={() => navigation.navigate("SongList", { list: "Discover" })} >
+            <TouchableOpacity key={i} onPress={() => navigation.navigate("SongDetail", { song: item })} >
               <ImageBackground
 
                 imageStyle={{
@@ -32,7 +34,7 @@ export default function Discover() {
                   alignItems: "center",
                 }}>
                 <Text style={{ fontSize: 32, color: "white", fontFamily: Roboto.bold }}>
-                  Discover Card {i}
+                 Discover {item.title}
                 </Text>
               </ImageBackground>
             </TouchableOpacity>

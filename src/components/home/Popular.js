@@ -1,14 +1,19 @@
-import { Image, ScrollView, Text, View } from "react-native"
-import { discover } from "../../constants/data"
+import { useNavigation } from "@react-navigation/native"
+import { Image, ScrollView, Text, TouchableOpacity, View } from "react-native"
+import { discover, songs } from "../../constants/data"
 import Roboto from "../../constants/fonts"
+import SectionToolbar from "../SectionToolbar"
 
 
 export default function Popular() {
+    const navigation = useNavigation()
+    const filterArray = songs.filter((song) => song.categories.includes("Discover"))
+
     return (
         <>
-            <Text style={{ fontSize: 16, margin: 16, fontFamily: Roboto.medium }}>
-                Popular Songs
-            </Text>
+            <SectionToolbar title={"Populat Songs"} action={() => navigation.navigate("SongList", {
+                list: "Popular"
+            })} />
             <ScrollView
 
                 showsHorizontalScrollIndicator={false}
@@ -20,7 +25,7 @@ export default function Popular() {
                 }} horizontal={true}>
 
                 {
-                    discover.map((item, index) => <PopularItemCard item={item} key={index} />)
+                    filterArray.map((item, index) => <PopularItemCard item={item} key={index} />)
                 }
 
             </ScrollView>
@@ -30,24 +35,32 @@ export default function Popular() {
 }
 
 function PopularItemCard({ item }) {
+    const navigation = useNavigation()
     return (
 
-        <View style={{
+        <TouchableOpacity onPress={() => navigation.navigate("SongDetail", { song: item })} style={{
             marginRight: 16,
             width: 180
         }}>
             <Image style={{
-                borderRadius: 16,
+                borderTopLeftRadius: 8,
+                borderTopRightRadius: 8,
                 height: 240,
                 maxWidth: 180
 
             }} source={item.img} />
+            <View style={{
+                padding: 8,
+                borderBottomLeftRadius: 8,
+                borderBottomRightRadius: 8,
+                backgroundColor: "white",
+            }}>
+                <Text style={{ fontSize: 16, fontFamily: Roboto.medium }}>
+                    {item.title}
+                </Text>
+            </View>
 
-            <Text style={{ fontSize: 16, fontFamily: Roboto.medium }}>
-                {item.title || 'Some title Goes here which is very long'}
-            </Text>
-
-        </View>
+        </TouchableOpacity>
 
     )
 }
