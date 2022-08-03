@@ -20,7 +20,7 @@ const SongDetails = ({ route, navigation }) => {
                 position: "relative"
             }}>
 
-                <ScreenToolbar title={"Playing"} subtitle={title} onBack={() => navigation.goBack()} />
+                <ScreenToolbar style={{marginBottom:32}} title={"Playing"} subtitle={title} onBack={() => navigation.goBack()} />
                 <View style={{
 
                 }}>
