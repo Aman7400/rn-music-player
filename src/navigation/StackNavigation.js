@@ -14,8 +14,8 @@ const HomeStack = () => {
             headerShown: false,
         }}>
             <Stack.Screen name="Home" component={Home} />
-            <Stack.Screen name ="SongList" options={({ route }) => ({ title: route.params.list,headerShown:true })} component={ScrollabelSongList} />
-            <Stack.Screen name ="SongDetail" options={({ route }) => ({ title: route.params.song.title,headerShown:true })} component={SongDetails} />
+            <Stack.Screen name ="SongList"  component={ScrollabelSongList} />
+            <Stack.Screen name ="SongDetail" component={SongDetails} />
             <Stack.Screen name ="Notification" component={Notification} />
         </Stack.Navigator>
     )
@@ -27,8 +27,8 @@ const CategoryStack = () => {
             headerShown: false,
         }}>
             <Stack.Screen name="Category" component={Categories} />
-            <Stack.Screen name ="SongList"  options={({ route }) => ({ title: route.params.list,headerShown:true,headerBackTitleVisible:false })}  component={ScrollabelSongList} />
-            <Stack.Screen name ="SongDetail" options={({ route }) => ({ title: route.params.song.title,headerShown:true,headerBackTitleVisible:false  })} component={SongDetails} />
+            <Stack.Screen name ="SongList"    component={ScrollabelSongList} />
+            <Stack.Screen name ="SongDetail"  component={SongDetails} />
         </Stack.Navigator>
     )
 }
