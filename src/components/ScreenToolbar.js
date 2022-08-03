@@ -4,14 +4,14 @@ import IonIcon from './IonIcon'
 import Roboto from "../constants/fonts"
 
 
-const ScreenToolbar = ({ title, subtitle, onBack }) => {
+const ScreenToolbar = ({ title, subtitle, onBack, style, }) => {
     return (
         <View style={{
             flexDirection: "row",
             alignItems: "center",
-            justifyContent: "space-between", marginBottom: 32
+            justifyContent: "space-between",
+            ...style
         }}>
-
             <IonIcon onPress={onBack} name="arrow-back-outline" color="violet" size={30} />
 
             <View style={{ alignItems: "center", }}>
